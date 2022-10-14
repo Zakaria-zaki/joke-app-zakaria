@@ -1,9 +1,9 @@
 pipeline {
   agent any
 
-  parameters {
-    choice(choices: ['Node 17', 'Node 18'], name: 'NODE_INSTALLATION_NAME')
-  }
+  // parameters {
+  //   choice(choices: ['Node 17', 'Node 18'], name: 'NODE_INSTALLATION_NAME')
+  // }
 
   // environment {
   //   TOKEN = credentials("herokuToken")
