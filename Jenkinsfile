@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        choice(choices: ['node 17', 'node 18', 'node 19'], name: 'NODE_VERSIONS')
+        choice(choices: ['Node 17', 'Node 18'], name: 'NODE_VERSIONS')
     }
 
     stages {
@@ -10,9 +10,10 @@ pipeline {
             steps { 
                 nodejs(nodeJSInstallationName: '${params.NODE_VERSIONS}') {
                     sh 'npm -v'
-                    sh 'npm install'
-                    sh 'npm build'
-                    sh 'npm test '
+                    sh 'npm i -g pnpm'
+                    sh 'pnpm install --frozen-lockfile'
+                    sh 'pnpm build'
+                    sh 'pnpm test '
                 }
             }
         }
