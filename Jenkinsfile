@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-        stage ('build') {
+        stage('build') {
             steps { 
                 // this is for the utilistion of the credentials 
                 // sh "token = ${TOKEN}"
@@ -24,12 +24,14 @@ pipeline {
         }
 
         stage('deploy') {
-            script {
+            steps {
+                script {
                 docker.withRegistry('https://registry.hub.docker.com', 'dockerId') {
                     def image = docker.build('zattaoui/joke-app-jenkins')
 
                     image.push('latest')
                 }
+            }
             }
         }
     }
