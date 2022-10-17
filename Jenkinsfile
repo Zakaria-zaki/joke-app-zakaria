@@ -16,10 +16,7 @@ pipeline {
 
       steps {
         // nodejs(nodeJSInstallationName: "${params.NODE_INSTALLATION_NAME}") {
-          sh 'node -v'
-          sh 'npm install'
-          sh 'npm run build'
-          sh 'npm test'
+          sh "echo 'Building ... '"
         }
       }
     }
