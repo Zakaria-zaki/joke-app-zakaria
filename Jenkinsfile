@@ -10,10 +10,9 @@ pipeline {
             steps { 
                 nodejs(nodeJSInstallationName: '${params.NODE_VERSIONS}') {
                     sh 'npm -v'
-                    sh 'npm i -g pnpm'
-                    sh 'pnpm install --frozen-lockfile'
-                    sh 'pnpm build'
-                    sh 'pnpm test '
+                    sh 'npm install'
+                    sh 'npm build'
+                    sh 'npm test '
                 }
             }
         }
