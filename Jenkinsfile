@@ -9,9 +9,9 @@ pipeline {
         stage ('build') {
             steps { 
                 nodejs(nodeJSInstallationName: '${params.NODE_VERSIONS}') {
-                    sh 'npm -v'
+                    sh 'node -v'
                     sh 'npm install'
-                    sh 'npm build'
+                    sh 'npm run build'
                     sh 'npm test '
                 }
             }
