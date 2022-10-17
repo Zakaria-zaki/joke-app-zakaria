@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage ('build') {
             steps { 
-                nodejs(nodeJSInstallationName: ${params.NODE_VERSIONS}) {
+                nodejs(nodeJSInstallationName: '${params.NODE_VERSIONS}') {
                     sh 'npm -v'
                     sh 'npm i -g pnpm'
                     sh 'pnpm install --frozen-lockfile'
