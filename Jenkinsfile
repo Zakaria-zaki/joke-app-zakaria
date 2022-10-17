@@ -5,9 +5,10 @@ pipeline {
         choice(choices: ['Node 17', 'Node 18'], name: 'NODE_VERSIONS')
     }
 
-    // environment {
-    //     TOKEN = credentials("herokuID2")
-    // }
+    environment {
+        // TOKEN = credentials("herokuID2")
+        tag = "registry.heroku.com/joke-jenkins/web"
+    }
 
     stages {
         stage('build') {
@@ -23,16 +24,33 @@ pipeline {
             }
         }
 
+        // stage('deploy') {
+        //     steps {
+        //         script {
+        //         docker.withRegistry('https://registry.hub.docker.com', 'dockerId') {
+        //             def image = docker.build('zattaoui/joke-app-jenkins')
+
+        //             image.push('latest')
+        //         }
+        //     }
+        //     }
+        // }
+
         stage('deploy') {
+
             steps {
                 script {
-                docker.withRegistry('https://registry.hub.docker.com', 'dockerId') {
-                    def image = docker.build('zattaoui/joke-app-jenkins')
+                def image = docker.build('zattaoui/joke-app-jenkins')
 
-                    image.push('latest')
+                docker.withRegistry('https://registry.hub.docker.com', 'dockerId') {
+                    def dockerImage = image
+                    dockerImage.push('latest')
+                }
+
+                docker.withRegistry('https://registry.heroku.com', 'herokuID2') {
+                    sh "docker tag zattaoui/joke-app-jenkins ${tag}:latest"
+                    sh "docker push ${tag}:latest"
                 }
             }
-            }
-        }
     }
 }
