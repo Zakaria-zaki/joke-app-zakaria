@@ -5,9 +5,9 @@ pipeline {
         choice(choices: ['Node 17', 'Node 18'], name: 'NODE_VERSIONS')
     }
 
-    environment {
-        TOKEN = credentials("herokuID2")
-    }
+    // environment {
+    //     TOKEN = credentials("herokuID2")
+    // }
 
     stages {
         stage('build') {
