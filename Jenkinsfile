@@ -7,7 +7,7 @@ pipeline {
 
     environment {
         // TOKEN = credentials("herokuID2")
-        tag = "registry.heroku.com/joke-jenkins/web"
+        tag = "registry.heroku.com/joke-app-jenkins/web"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
                     dockerImage.push('latest')
                 }
 
-                docker.withRegistry('https://registry.heroku.com', 'herokuID2') {
+                docker.withRegistry('https://registry.heroku.com', 'herokuId') {
                     sh "docker tag zattaoui/joke-app-jenkins ${tag}:latest"
                     sh "docker push ${tag}:latest"
                 }
