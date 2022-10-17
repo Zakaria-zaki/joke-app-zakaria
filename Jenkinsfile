@@ -51,6 +51,8 @@ pipeline {
                     sh "docker tag zattaoui/joke-app-jenkins ${tag}:latest"
                     sh "docker push ${tag}:latest"
                 }
+                }
             }
+        }
     }
 }
