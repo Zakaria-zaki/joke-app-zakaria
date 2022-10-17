@@ -3,8 +3,14 @@ pipeline {
 
     stages {
         stage ('build') {
-            steps {
-                sh "echo 'Building ...'"
+            steps { 
+                nodejs(nodeJSInstallationName: 'Node 17') {
+                    sh 'npm -v'
+                    sh 'npm i -g pnpm'
+                    sh 'pnpm install --frozen-lockfile'
+                    sh 'pnpm build'
+                    sh 'pnpm test'
+                }
             }
         }
     }
